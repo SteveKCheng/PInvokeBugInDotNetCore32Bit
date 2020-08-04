@@ -1,0 +1,7 @@
+bin/
+obj/
+NativeDll/bin/
+NativeDll/obj/
+*.csproj.user
+*.vcxproj.user
+.vs/
