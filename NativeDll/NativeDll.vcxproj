@@ -155,14 +155,15 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <Target Name="AfterBuild">
-    <MakeDir Directories="..\bin\$(ShortPlatform)\$(Configuration)\net452;..\bin\$(ShortPlatform)\$(Configuration)\netcoreapp3.1" />
-	<Copy SourceFiles="$(OutDir)$(TargetName).dll" 
-		  DestinationFolder="..\bin\$(ShortPlatform)\$(Configuration)\net452"
-		  SkipUnchangedFiles="true" 
-		  UseHardlinksIfPossible="true" />
-	<Copy SourceFiles="$(OutDir)$(TargetName).dll" 
-		  DestinationFolder="..\bin\$(ShortPlatform)\$(Configuration)\netcoreapp3.1"
-		  SkipUnchangedFiles="true" 
-		  UseHardlinksIfPossible="true" />
+    <ItemGroup>
+      <DotNetTargetFramework Include="netcoreapp3.1" />
+      <DotNetTargetFramework Include="net452" />
+      <DotNetTargetFramework Include="net5.0" />
+    </ItemGroup>
+    <MakeDir Directories="..\bin\$(ShortPlatform)\$(Configuration)\%(DotNetTargetFramework.Identity)" />
+    <Copy SourceFiles="$(OutDir)$(TargetName).dll" 
+	    	  DestinationFolder="..\bin\$(ShortPlatform)\$(Configuration)\%(DotNetTargetFramework.Identity)"
+		      SkipUnchangedFiles="true" 
+		      UseHardlinksIfPossible="true" />
   </Target>
 </Project>
