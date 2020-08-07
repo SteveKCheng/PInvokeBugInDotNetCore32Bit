@@ -1,3 +1,11 @@
+#ifdef _WIN32
+#define CALLCONV __cdecl
+#define DLLEXPORT __declspec(dllexport)
+#else
+#define CALLCONV
+#define DLLEXPORT
+#endif
+
 extern "C"
 {
 	struct ReturnStruct
@@ -7,9 +15,9 @@ extern "C"
 		void* c;
 	};
 
-	typedef ReturnStruct(__cdecl *CallbackFn)(void* p);
+	typedef ReturnStruct(CALLCONV *CallbackFn)(void* p);
 
-	__declspec(dllexport) ReturnStruct __cdecl InvokeCallback(CallbackFn fn, void* p)
+	DLLEXPORT ReturnStruct CALLCONV InvokeCallback(CallbackFn fn, void* p)
 	{
 		return fn(p);
 	}
