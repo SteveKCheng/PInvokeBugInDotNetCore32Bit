@@ -4,10 +4,12 @@
     <OutputType>Exe</OutputType>
     <TargetFrameworks>net452;netcoreapp3.1</TargetFrameworks>
     <Platforms>x86;x64</Platforms>
+    <Platform Condition="'$(Platform)' == ''">x64</Platform>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="NativeDll\NativeDll.vcxproj" />
+    <ProjectReference Include="NativeDll\NativeDll.vcxproj"
+                      Condition="'$(MSBuildRunTimeType)' != 'Core'" />
   </ItemGroup>
 </Project>
